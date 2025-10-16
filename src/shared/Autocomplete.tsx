@@ -1,15 +1,15 @@
 import type { JSX } from 'react';
 
 import { useKeyboardNavigation } from '@/hooks';
-import type { CountryInfo } from '@/services/api-service/api.types';
-import { AutocompleteVM } from '@/viewmodels/AutocompleteVM';
+import type { CountryInfo } from '@/services';
+import { AutocompleteVM } from '@/viewmodels';
 import { observer } from 'mobx-react-lite';
 
-type AutocompleteProps = {
+interface AutocompleteProps {
   vm: AutocompleteVM;
   label?: string;
   placeholder?: string;
-};
+}
 
 export const Autocomplete = observer(
   ({ vm, label, placeholder = 'Страна...' }: AutocompleteProps): JSX.Element => {

@@ -21,7 +21,6 @@ const App = (): JSX.Element => {
         <section className="space-y-4">
           <h2 className="text-xl font-medium">Контрол с кнопками</h2>
 
-          {/* Контрол с 2 кнопками справа */}
           <div className="space-y-2">
             <h3 className="text-sm font-semibold text-gray-700">Два справа</h3>
             <InputWithButtons
@@ -38,7 +37,6 @@ const App = (): JSX.Element => {
             />
           </div>
 
-          {/* Контрол с 1 кнопкой справа и 1 слева */}
           <div className="space-y-2">
             <h3 className="text-sm font-semibold text-gray-700">Одна слева, одна справа</h3>
             <InputWithButtons

@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 
-export class TextControlVM {
+import type { ITextControlVM } from './TextControlVM.type';
+
+export class TextControlVM implements ITextControlVM {
   text: string = '';
 
   constructor(initialText: string = '') {
@@ -25,7 +27,6 @@ export class TextControlVM {
     return !isNaN(Number(this.text));
   };
 
-  // Returns a number if current text is numeric, otherwise null
   parseNumber = (): number | null => {
     const trimmed = this.text.trim();
     if (trimmed === '') return null;
@@ -33,7 +34,6 @@ export class TextControlVM {
     return Number.isNaN(n) ? null : n;
   };
 
-  // Text for displaying to user (never empty)
   get displayText(): string {
     return this.text ? this.text : '(пусто)';
   }

@@ -1,7 +1,9 @@
 import { type CountryInfo, countryService } from '@/services';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-export class AutocompleteVM {
+import type { IAutocompleteVM } from './AutocompleteVM.type';
+
+export class AutocompleteVM implements IAutocompleteVM {
   query: string = '';
   suggestions: CountryInfo[] = [];
   isOpen: boolean = false;
