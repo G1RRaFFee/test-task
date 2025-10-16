@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-import type { ITextControlVM } from './TextControlVM.type';
+import type { ITextControlVM } from './textControlVM.type';
 
 export class TextControlVM implements ITextControlVM {
   text: string = '';

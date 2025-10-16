@@ -1,7 +1,9 @@
+import { createDebounced } from '@/lib';
 import { type CountryInfo, countryService } from '@/services';
 import { makeAutoObservable, runInAction } from 'mobx';
 
-import type { IAutocompleteVM } from './AutocompleteVM.type';
+import { DEBOUNCE_TIME } from './autocomplete.constant';
+import type { IAutocompleteVM } from './autocompleteVM.type';
 
 export class AutocompleteVM implements IAutocompleteVM {
   query: string = '';
@@ -10,15 +12,27 @@ export class AutocompleteVM implements IAutocompleteVM {
   isLoading: boolean = false;
   error: string | null = null;
   maxSuggestions: number;
+  private readonly debouncedFetch: () => void;
 
   constructor(maxSuggestions: number = 5) {
     this.maxSuggestions = maxSuggestions;
     makeAutoObservable(this);
+    this.debouncedFetch = createDebounced(() => this.fetchSuggestions(), DEBOUNCE_TIME);
   }
 
   setQuery = (value: string) => {
     this.query = value;
-    this.fetchSuggestions();
+
+    const query = value.trim();
+    if (query.length === 0) {
+      this.suggestions = [];
+      this.isOpen = false;
+      this.isLoading = false;
+      this.error = null;
+      return;
+    }
+
+    this.debouncedFetch();
   };
 
   close = () => {
